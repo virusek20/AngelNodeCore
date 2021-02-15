@@ -1,0 +1,322 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:node="clr-namespace:AngelNode.Model.Node"
+                    xmlns:util="clr-namespace:AngelNode.Util">
+    <util:LowecaseConverter x:Key="LowercaseConverter"/>
+    <util:EventTypeEnumToStringConverter x:Key="EventTypeEnumToStringConverter"/>
+    <DataTemplate DataType="{x:Type node:NodeDialogue}">
+        <Border Background="#E59400" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/bubble.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Dialogue - {0}: &quot;{1}&quot;">
+                                <Binding Path="Character.Name" FallbackValue="(No character)"/>
+                                <Binding Path="Text" FallbackValue=""/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeMovement}">
+        <Border Background="Green" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/run.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Movement - {0}: {1}, {2}, {3}">
+                                <Binding Path="Character.Name" FallbackValue="(No character)"/>
+                                <Binding Path="MovementDirection"/>
+                                <Binding Path="MovementType"/>
+                                <Binding Path="MovementAnimation"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeChangeBackground}">
+        <Border Background="DarkBlue" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/image.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Background change - {0}, Type: {1} ({2})">
+                                <Binding Path="Background.Name" FallbackValue="(No background)"/>
+                                <Binding Path="TransitionType">
+                                    <Binding.Converter>
+                                        <util:TransitionTypeEnumToStringConverter/>
+                                    </Binding.Converter>
+                                </Binding>
+                                <Binding Path="TransitionSpeed"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeChangePose}">
+        <Border Background="Orchid " CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/face.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Pose change - {0} -> {1}">
+                                <Binding Path="Character.Name" FallbackValue="(No character)"/>
+                                <Binding Path="Pose.Name" FallbackValue="(No pose)"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeOutfitUnlocked}">
+        <Border Background="LightPink" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/outfit.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Outfit unlock - {0} -> {1}">
+                                <Binding Path="Character.Name" FallbackValue="(No character)"/>
+                                <Binding Path="Outfit.Name" FallbackValue="(No outfit)"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeResponseDialogue}">
+        <Border Background="#E59400" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/bubble2.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Response dialogue - {0} -> &quot;{1}&quot;, {2} options">
+                                <Binding Path="Character.Name" FallbackValue="(No character)"/>
+                                <Binding Path="Dialogue"/>
+                                <Binding Path="ResponseMap.Count"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeJump}">
+        <Border Background="DarkCyan" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/up.png"/>
+                    <TextBlock Text="Jump"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeSetVariable}">
+        <Border Background="Gray" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/gear.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Change variable - {0} {1} {2}">
+                                <Binding Path="Variable.Name" FallbackValue="(No variable)"/>
+                                <Binding Path="Type">
+                                    <Binding.Converter>
+                                        <util:OperationConverter/>
+                                    </Binding.Converter>
+                                </Binding>
+                                <Binding Path="Value" FallbackValue="False"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeVariableJump}">
+        <Border Background="DarkCyan" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/branch.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Conditional jump - {0} {1} {2}">
+                                <Binding Path="Variable.Name" FallbackValue="(No variable)"/>
+                                <Binding Path="Type">
+                                    <Binding.Converter>
+                                        <util:OperationConverter/>
+                                    </Binding.Converter>
+                                </Binding>
+                                <Binding Path="Value" FallbackValue="False"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodePlaySound}">
+        <Border Background="DarkMagenta" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/sound.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Play sound - {0} at {2}s, Type: {1}">
+                                <Binding Path="Sound.Name" FallbackValue="(No sound)"/>
+                                <Binding Path="SoundType"/>
+                                <Binding Path="StartTime"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeShake}">
+        <Border Background="Brown" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/shake.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Shake - Characters: {0}, Background: {1}, Amplitude: {2}px, Duration: {3}s">
+                                <Binding Path="ShakeCharacters"/>
+                                <Binding Path="ShakeBackground"/>
+                                <Binding Path="Amplitude"/>
+                                <Binding Path="Duration"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeWait}">
+        <Border Background="MediumVioletRed" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/wait.png"/>
+                    <TextBlock Text="{Binding StringFormat='Wait - {0}s', Path=Duration}"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeFadeMusic}">
+        <Border Background="#111111" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/mute.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Fade {0} - {1}s">
+                                <Binding Path="AudioFadeType" Converter="{StaticResource LowercaseConverter}"/>
+                                <Binding Path="FadeTime"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeEvent}">
+        <Border Background="#111111" CornerRadius="7" Padding="2">
+            <Border Background="Gold" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/event.png"/>
+                    <TextBlock Text="{Binding StringFormat='Effect - {0}', Path=EventType, Converter={StaticResource EventTypeEnumToStringConverter}}"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeTodo}">
+        <Border Background="#111111" CornerRadius="7" Padding="2">
+            <Border Background="Lime" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/todo.png"/>
+                    <TextBlock Text="{Binding StringFormat='Todo - {0}', Path=Note, FallbackValue='(No note)'}"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeCall}">
+        <Border Background="DarkRed" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/up.png"/>
+                    <TextBlock Text="{Binding StringFormat='Call - {0}', Path=Target.Name, FallbackValue='(No target)'}"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeRet}">
+        <Border Background="Black" CornerRadius="7" Padding="2">
+            <Border Background="DarkRed" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/return_inv.png"/>
+                    <TextBlock Foreground="White" Text="Return"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodePhone}">
+        <Border Background="Black" CornerRadius="7" Padding="2">
+            <Border Background="GreenYellow" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/phone.png"/>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="Phone - {0} ({1} messages)">
+                                <Binding Path="Character.Name" FallbackValue="(No character)"/>
+                                <Binding Path="PhoneMessages.Count" FallbackValue="0"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeLua}">
+        <Border Background="Blue" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/lua.png"/>
+                    <TextBlock Text="Lua Script"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeAchievement}">
+        <Border Background="Blue" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/achievement.png"/>
+                    <TextBlock Text="{Binding StringFormat='Achievement - {0}', Path=Name, FallbackValue='Achievement - (No achievement)'}"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type node:NodeRouteCompleted}">
+        <Border Background="DarkOliveGreen" CornerRadius="7" Padding="2">
+            <Border Background="White" CornerRadius="5" Padding="2,1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/person.png"/>
+                    <TextBlock Text="{Binding StringFormat='Route completed - {0}', Path=Name, FallbackValue='Route completed - (No route)'}"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

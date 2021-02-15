@@ -1,0 +1,101 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <StartupObject>AngelNode.App</StartupObject>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Service\Implementations\Cpp\CppExportService.cs" />
+    <Compile Remove="Service\Implementations\Cpp\CppNodeVisitor.cs" />
+    <Compile Remove="Service\Implementations\ProjectXML\BranchingInterpreter\BranchingInterpreter.cs" />
+    <Compile Remove="Service\Implementations\ProjectXML\BranchingInterpreter\BranchingInterpreterVisitor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Util\Icons\achievement.png" />
+    <None Remove="Util\Icons\analyze.png" />
+    <None Remove="Util\Icons\branch.png" />
+    <None Remove="Util\Icons\bubble.png" />
+    <None Remove="Util\Icons\bubble2.png" />
+    <None Remove="Util\Icons\dot.png" />
+    <None Remove="Util\Icons\event.png" />
+    <None Remove="Util\Icons\face.png" />
+    <None Remove="Util\Icons\file.png" />
+    <None Remove="Util\Icons\folder.png" />
+    <None Remove="Util\Icons\gear.png" />
+    <None Remove="Util\Icons\home.png" />
+    <None Remove="Util\Icons\image.png" />
+    <None Remove="Util\Icons\lua.png" />
+    <None Remove="Util\Icons\mute.png" />
+    <None Remove="Util\Icons\outfit.png" />
+    <None Remove="Util\Icons\person.png" />
+    <None Remove="Util\Icons\phone.png" />
+    <None Remove="Util\Icons\play.png" />
+    <None Remove="Util\Icons\question.png" />
+    <None Remove="Util\Icons\return.png" />
+    <None Remove="Util\Icons\return_inv.png" />
+    <None Remove="Util\Icons\run.png" />
+    <None Remove="Util\Icons\scene.png" />
+    <None Remove="Util\Icons\shake.png" />
+    <None Remove="Util\Icons\sound.png" />
+    <None Remove="Util\Icons\todo.png" />
+    <None Remove="Util\Icons\up.png" />
+    <None Remove="Util\Icons\variable.png" />
+    <None Remove="Util\Icons\wait.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Service\Implementations\Cpp\CppExportService.cs" />
+    <None Include="Service\Implementations\Cpp\CppNodeVisitor.cs" />
+    <None Include="Service\Implementations\ProjectXML\BranchingInterpreter\BranchingInterpreter.cs" />
+    <None Include="Service\Implementations\ProjectXML\BranchingInterpreter\BranchingInterpreterVisitor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="gong-wpf-dragdrop" Version="2.3.2" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+    <PackageReference Include="NuGet.Versioning" Version="5.8.1" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Util\Icons\achievement.png" />
+    <Resource Include="Util\Icons\analyze.png" />
+    <Resource Include="Util\Icons\branch.png" />
+    <Resource Include="Util\Icons\bubble.png" />
+    <Resource Include="Util\Icons\bubble2.png" />
+    <Resource Include="Util\Icons\dot.png" />
+    <Resource Include="Util\Icons\event.png" />
+    <Resource Include="Util\Icons\face.png" />
+    <Resource Include="Util\Icons\file.png" />
+    <Resource Include="Util\Icons\folder.png" />
+    <Resource Include="Util\Icons\gear.png" />
+    <Resource Include="Util\Icons\home.png" />
+    <Resource Include="Util\Icons\image.png" />
+    <Resource Include="Util\Icons\lua.png" />
+    <Resource Include="Util\Icons\mute.png" />
+    <Resource Include="Util\Icons\outfit.png" />
+    <Resource Include="Util\Icons\person.png" />
+    <Resource Include="Util\Icons\phone.png" />
+    <Resource Include="Util\Icons\play.png" />
+    <Resource Include="Util\Icons\question.png" />
+    <Resource Include="Util\Icons\return.png" />
+    <Resource Include="Util\Icons\return_inv.png" />
+    <Resource Include="Util\Icons\run.png" />
+    <Resource Include="Util\Icons\scene.png" />
+    <Resource Include="Util\Icons\shake.png" />
+    <Resource Include="Util\Icons\sound.png" />
+    <Resource Include="Util\Icons\todo.png" />
+    <Resource Include="Util\Icons\up.png" />
+    <Resource Include="Util\Icons\variable.png" />
+    <Resource Include="Util\Icons\wait.png" />
+  </ItemGroup>
+
+</Project>

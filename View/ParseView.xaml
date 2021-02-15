@@ -1,0 +1,41 @@
+﻿<Window x:Class="AngelNode.View.ParseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Name="ParseWindow"
+        WindowStartupLocation="CenterOwner"
+        DataContext="{Binding ParseViewModel, Source={StaticResource Locator}}"
+        FocusManager.FocusedElement="{Binding ElementName=InputBox}"
+        Title="Text Parse" Height="450" Width="800">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Column="0" Grid.Row="0" Header="Input text">
+            <TextBox x:Name="InputBox" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Text}"/>
+        </GroupBox>
+        <GridSplitter Grid.Column="1" Grid.Row="0"/>
+        <GroupBox Header="Parsed nodes" Grid.Column="2" Grid.Row="0">
+            <ListView ItemsSource="{Binding Nodes}" IsEnabled="False">
+                <ListView.Resources>
+                    <ResourceDictionary Source="NodeNameDictionary.xaml"/>
+                </ListView.Resources>
+            </ListView>
+        </GroupBox>
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=ParseWindow}" Content="Cancel" Margin="6,3" Padding="6,2"/>
+            <Button Command="{Binding AcceptCommand}" CommandParameter="{Binding ElementName=ParseWindow}" Content="Accept" Margin="6,3" Padding="6,2"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Command="{Binding RefreshCommand}" Content="Refresh" Margin="6,3" Padding="6,2"/>
+        </StackPanel>
+    </Grid>
+</Window>

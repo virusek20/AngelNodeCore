@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:model="clr-namespace:AngelNode.Model">
+    <DataTemplate DataType="{x:Type model:Character}">
+        <TextBlock Text="{Binding Path=Name}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type model:Variable}">
+        <TextBlock Text="{Binding Path=Name}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type model:Scene}">
+        <TextBlock Text="{Binding Path=Name}"/>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="AngelNode.View.ResourceTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             xmlns:resource="clr-namespace:AngelNode.Model.Resource"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:util="clr-namespace:AngelNode.Util"
+             mc:Ignorable="d" 
+             DataContext="{Binding ResourceTreeViewModel, Source={StaticResource Locator}}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <util:BindingProxy Data="{Binding}" x:Key="Proxy"/>
+    </UserControl.Resources>
+    <TreeView x:Name="ResourceTree" dd:DragDrop.IsDragSource="True" BorderThickness="0">
+            <TreeViewItem IsExpanded="True" ItemsSource="{Binding RootDirectory.Files}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding Source={StaticResource Proxy}, Path=Data.PreviewImageCommand}" CommandParameter="{Binding ElementName=ResourceTree, Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/folder.png"/>
+                        <TextBlock Text="Resources"/>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type resource:Directory}" ItemsSource="{Binding Files}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/folder.png"/>
+                            <TextBlock Text="{Binding Name}" ToolTip="{Binding Path}"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+
+                    <HierarchicalDataTemplate DataType="{x:Type resource:File}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0">
+                                <Image.Style>
+                                    <Style TargetType="{x:Type Image}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding FileType}" Value="Image">
+                                                <Setter Property="Source" Value="../Util/Icons/image.png" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding FileType}" Value="Sound">
+                                                <Setter Property="Source" Value="../Util/Icons/sound.png" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding FileType}" Value="Unknown">
+                                                <Setter Property="Source" Value="../Util/Icons/file.png" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeViewItem.Resources>
+            </TreeViewItem>
+        </TreeView>
+</UserControl>

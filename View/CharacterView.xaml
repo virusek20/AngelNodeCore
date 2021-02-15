@@ -1,0 +1,187 @@
+﻿<TabItem x:Class="AngelNode.View.CharacterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:util="clr-namespace:AngelNode.Util"
+             xmlns:node="clr-namespace:AngelNode.Util.Node"
+             xmlns:validation="clr-namespace:AngelNode.Util.Validation"
+             xmlns:control="clr-namespace:AngelNode.View.Control"
+             mc:Ignorable="d"
+             DataContext="{Binding CharacterViewModel, Source={StaticResource Locator}}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <TabItem.Resources>
+        <util:BindingProxy x:Key="Proxy" Data="{Binding}" />
+        <node:ChangePoseNodeDropHandler x:Key="ChangePoseNodeDropHandler"/>
+        <node:BackgroundDropHandler x:Key="PhonePictureDropHandler"/>
+        <util:OutfitDropHandler x:Key="OutfitDropHandler"/>
+    </TabItem.Resources>
+    <TabItem.Header>
+        <StackPanel Orientation="Horizontal">
+            <Image Width="14" RenderOptions.BitmapScalingMode="Fant" Margin="0,0,3,0" Source="../Util/Icons/person.png"/>
+            <TextBlock Text="{Binding Character.Name}"/>
+        </StackPanel>
+    </TabItem.Header>
+    <DockPanel Margin="5">
+        <GroupBox DockPanel.Dock="Top"  Header="Character details">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+                <Label Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center" Content="Name:"/>
+                <TextBox Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" MinWidth="200" Margin="5,5,0,0">
+                    <TextBox.Text>
+                        <Binding Path="Character.Name" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validation:ObjectNameRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+
+                <Label Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Content="Default pose:"/>
+                <ComboBox Grid.Column="1" Grid.Row="1" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{StaticResource ChangePoseNodeDropHandler}" VerticalContentAlignment="Center" MinWidth="200" ItemsSource="{Binding Poses}" DisplayMemberPath="Name" SelectedItem="{Binding Character.DefaultPose}" Margin="5,5,0,0"/>
+
+                <Label Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" Content="Height:" ToolTip="Pixel offset of the character on screen (Default 0)"/>
+                <TextBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" MinWidth="200" Text="{Binding Character.Height, Mode=TwoWay}" Margin="5,5,0,0"/>
+
+                <Label Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" Content="Pitch:" ToolTip="Pitch of the text scroll sound (Default 1.0)"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" Margin="0,5">
+                    <Slider VerticalContentAlignment="Center" MinWidth="400" Minimum="0.75" Maximum="1.25" IsSnapToTickEnabled="True" TickFrequency="0.05" TickPlacement="BottomRight" Value="{Binding Character.Pitch, Mode=TwoWay}" Margin="5,5,0,0"/>
+                    <TextBox MinWidth="35" HorizontalContentAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" Padding="1">
+                        <TextBox.Text>
+                            <Binding Path="Character.Pitch" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:FloatRangeRule MinValue="0.75" MaxValue="1.25"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                
+
+                <Label Grid.Column="0" Grid.Row="4" VerticalContentAlignment="Center" Content="Color:" ToolTip="Name shadow color of the character"/>
+                <control:ColorPicker Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" MinWidth="200" Color="{Binding Character.Color, Mode=TwoWay}" Margin="0,5,0,0"/>
+
+                <Label Grid.Column="0" Grid.Row="5" VerticalContentAlignment="Center" Content="Phone number:" ToolTip="Phone number displayed in Phone nodes"/>
+                <TextBox Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" MinWidth="200" Text="{Binding Character.PhoneNumber, Mode=TwoWay}" Margin="5,5,0,0"/>
+
+                <Label Grid.Column="0" Grid.Row="6" VerticalContentAlignment="Center" Content="Phone picture:" ToolTip="Profile picture displayed in Phone nodes"/>
+                <ListBox Grid.Column="1" Grid.Row="6" dd:DragDrop.DropHandler="{StaticResource PhonePictureDropHandler}" dd:DragDrop.IsDropTarget="True" MinWidth="200" DisplayMemberPath="Name" ItemsSource="{Binding Source={StaticResource Proxy}, Path=Data.PhonePictureSource}" SelectedItem="{Binding Character.PhonePicture}" Margin="5,5,0,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding Source={StaticResource Proxy}, Path=Data.ResourcePickerCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox DockPanel.Dock="Top" Header="Graphics">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Grid.Row="0" Grid.Column="0" Header="Outfit poses">
+                    <ListView x:Name="OutfitPoseList" IsEnabled="True" VerticalAlignment="Stretch" ItemsSource="{Binding Character.OutfitPoses}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Label>
+                                    <Label.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Set as showcase" Command="{Binding Source={StaticResource Proxy}, Path=Data.SetShowcasePoseCommand}" CommandParameter="{Binding}" />
+                                            <MenuItem Header="Delete" Command="{Binding Source={StaticResource Proxy}, Path=Data.DeletePoseCommand}" CommandParameter="{Binding}" />
+                                        </ContextMenu>
+                                    </Label.ContextMenu>
+                                    <Label.Content>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </Label.Content>
+                                </Label>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </GroupBox>
+
+                <GroupBox Grid.Row="1" Grid.Column="0" Header="Shared poses">
+                    <ListView x:Name="PoseList" SelectionMode="Single" VerticalAlignment="Stretch" dd:DragDrop.IsDropTarget="True" dd:DragDrop.IsDragSource="True" dd:DragDrop.DropHandler="{Binding}" ItemsSource="{Binding Character.SharedPoses}">
+                        <ListView.InputBindings>
+                            <KeyBinding Key="Delete" Command="{Binding DeletePoseCommand}" CommandParameter="{Binding ElementName=PoseList, Path=SelectedItem}"/>
+                        </ListView.InputBindings>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Label>
+                                    <Label.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Set as default" Command="{Binding Source={StaticResource Proxy}, Path=Data.SetDefaultPoseCommand}" CommandParameter="{Binding}" />
+                                            <MenuItem Header="Delete" Command="{Binding Source={StaticResource Proxy}, Path=Data.DeletePoseCommand}" CommandParameter="{Binding}" />
+                                        </ContextMenu>
+                                    </Label.ContextMenu>
+                                    <Label.Content>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} ({1})">
+                                                    <Binding Path="Name" />
+                                                    <Binding Path="File.Path" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Label.Content>
+                                </Label>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </GroupBox>
+
+                <GroupBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Header="Outfits">
+                    <ListView x:Name="OutfitList" SelectionMode="Single" VerticalAlignment="Stretch" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{StaticResource OutfitDropHandler}" ItemsSource="{Binding Character.Outfits}">
+                        <ListView.InputBindings>
+                            <KeyBinding Key="Delete" Command="{Binding DeleteOutfitCommand}" CommandParameter="{Binding ElementName=OutfitList, Path=SelectedItem}"/>
+                        </ListView.InputBindings>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Label>
+                                    <Label.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Delete" Command="{Binding Source={StaticResource Proxy}, Path=Data.DeleteOutfitCommand}" CommandParameter="{Binding}" />
+                                        </ContextMenu>
+                                    </Label.ContextMenu>
+                                    <Label.Content>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} ({1})">
+                                                    <Binding Path="Name" />
+                                                    <Binding Path="Directory.Path" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Label.Content>
+                                </Label>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+    </DockPanel>
+</TabItem>
