@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Project"
+    targetNamespace="http://tempuri.org/Project.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/Project.xsd"
+    xmlns:mstns="http://tempuri.org/Project.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:simpleType name="color">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="#[\dA-F]{6}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:element name="Project">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Variables"/>
+        <xs:element ref="Characters"/>
+        <xs:element ref="Scenes"/>
+      </xs:sequence>
+      <xs:attribute name="Name" type="xs:string"/>
+      <xs:attribute name="Version" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Variables">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Variable">
+          <xs:complexType>
+            <xs:attribute name="Name" type="xs:string"/>
+            <xs:attribute name="HighlightChanges" type="xs:string"/>
+            <xs:attribute name="Binary" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Characters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Character">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="Poses"/>
+              <xs:element ref="Outfits"/>
+            </xs:sequence>
+            <xs:attribute name="Name" type="xs:string"/>
+            <xs:attribute name="Height" type="xs:int"/>
+            <xs:attribute name="Pitch" type="xs:float"/>
+            <xs:attribute name="Color" type="color"/>
+            <xs:attribute name="PhoneNumber" type="xs:string"/>
+            <xs:attribute name="DefaultPose" type="xs:nonNegativeInteger"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Poses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Pose">
+          <xs:complexType>
+            <xs:attribute name="Path" type="xs:string" use="optional"/>
+            <xs:attribute name="RelativePath" type="xs:string" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Outfits">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Outfit">
+          <xs:complexType>
+            <xs:attribute name="Path" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeAchievement">
+    <xs:complexType>
+      <xs:attribute name="Name" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeCall">
+    <xs:complexType>
+      <xs:attribute name="TargetScene" type="xs:nonNegativeInteger"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeDialogue">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="Character" type="xs:nonNegativeInteger"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeEvent">
+    <xs:complexType>
+      <xs:attribute name="EventType" type="xs:string"/>
+      <xs:attribute name="BlackOnWhite" type="xs:string" use="optional"/>
+      <xs:attribute name="Duration" type="xs:float" use="optional"/>
+      <xs:attribute name="Text" type="xs:string" use="optional"/>
+      <xs:attribute name="Caller" type="xs:nonNegativeInteger" use="optional"/>
+      <xs:attribute name="IsPlayerInitiated" type="xs:string" use="optional"/>
+      <xs:attribute name="IsOngoing" type="xs:string" use="optional"/>
+      <xs:attribute name="PhoneTime" type="xs:string" use="optional"/>
+      <xs:attribute name="EventName" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeFadeMusic">
+    <xs:complexType>
+      <xs:attribute name="FadeTime" type="xs:float"/>
+      <xs:attribute name="Type" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeChangeBackground">
+    <xs:complexType>
+      <xs:attribute name="Path" type="xs:string"/>
+      <xs:attribute name="TransitionType" type="xs:string"/>
+      <xs:attribute name="TransitionSpeed" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeChangePose">
+    <xs:complexType>
+      <xs:attribute name="Character" type="xs:nonNegativeInteger"/>
+      <xs:attribute name="Pose" type="xs:nonNegativeInteger"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeJump">
+    <xs:complexType>
+      <xs:attribute name="TargetScene" type="xs:nonNegativeInteger"/>
+      <xs:attribute name="TargetNode" type="xs:nonNegativeInteger"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeMovement">
+    <xs:complexType>
+      <xs:attribute name="Direction" type="xs:string"/>
+      <xs:attribute name="Type" type="xs:string"/>
+      <xs:attribute name="Animation" type="xs:string"/>
+      <xs:attribute name="Character" type="xs:nonNegativeInteger"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="NodeOutfitUnlocked">
+    <xs:complexType>
+      <xs:attribute name="Character" type="xs:nonNegativeInteger"/>
+      <xs:attribute name="Outfit" type="xs:nonNegativeInteger"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Node">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="NodeAchievement"/>
+        <xs:element ref="NodeCall"/>
+        <xs:element ref="NodeDialogue"/>
+        <xs:element ref="NodeEvent"/>
+        <xs:element ref="NodeFadeMusic"/>
+        <xs:element ref="NodeChangeBackground"/>
+        <xs:element ref="NodeChangePose"/>
+        <xs:element ref="NodeJump"/>
+        <xs:element name="NodeLua" type="xs:string"/>
+        <xs:element ref="NodeMovement"/>
+        <xs:element ref="NodeOutfitUnlocked"/>
+        <!--
+        <xs:element ref="NodePhone"/>
+        <xs:element ref="NodePlaySound"/>
+        <xs:element ref="NodeResponseDialogue"/>
+        <xs:element ref="NodeRet"/>
+        <xs:element ref="NodeRouteCompleted"/>
+        <xs:element ref="NodeSetVariable"/>
+        <xs:element ref="NodeShake"/>
+        <xs:element ref="NodeTodo"/>
+        <xs:element ref="NodeVariableJump"/>
+        <xs:element ref="NodeWait"/>
+        -->
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Scenes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Scene">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Nodes">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Node"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Name" type="xs:string"/>
+            <xs:attribute name="Tag" type="xs:string"/>
+            <xs:attribute name="StartpointName" type="xs:string" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
