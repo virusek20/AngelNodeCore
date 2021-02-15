@@ -10,8 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Service\Implementations\Cpp\CppExportService.cs" />
-    <Compile Remove="Service\Implementations\Cpp\CppNodeVisitor.cs" />
     <Compile Remove="Service\Implementations\ProjectXML\BranchingInterpreter\BranchingInterpreter.cs" />
     <Compile Remove="Service\Implementations\ProjectXML\BranchingInterpreter\BranchingInterpreterVisitor.cs" />
   </ItemGroup>
@@ -50,8 +48,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Service\Implementations\Cpp\CppExportService.cs" />
-    <None Include="Service\Implementations\Cpp\CppNodeVisitor.cs" />
     <None Include="Service\Implementations\ProjectXML\BranchingInterpreter\BranchingInterpreter.cs" />
     <None Include="Service\Implementations\ProjectXML\BranchingInterpreter\BranchingInterpreterVisitor.cs" />
   </ItemGroup>

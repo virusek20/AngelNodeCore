@@ -2,7 +2,6 @@ using System;
 using AngelNode.Service.Implementations.DOT;
 using AngelNode.Service.Implementations.ExportXML;
 using AngelNode.Service.Implementations.ProjectXML;
-using AngelNode.Service.Implementations.RenPy;
 using AngelNode.Service.Implementations.ResourceUsage;
 using AngelNode.Service.Interface;
 using GalaSoft.MvvmLight.Ioc;
@@ -31,8 +30,6 @@ namespace AngelNode.ViewModel
             if (!SimpleIoc.Default.ContainsCreated<IProjectService>())
             {
                 SimpleIoc.Default.Register<IProjectService>(() => new LocalProjectService());
-                //SimpleIoc.Default.Register<IExportService>(() => new CppExportService(), "cpp");
-                SimpleIoc.Default.Register<IExportService>(() => new RenPyExportService(), "renpy");
                 SimpleIoc.Default.Register<IExportService>(() => new XmlExportService(), "xml");
                 SimpleIoc.Default.Register<IExportService>(() => new DotExportService(), "dot");
                 SimpleIoc.Default.Register<IExportService>(() => new ResourceUsageExportService(), "rsc");
